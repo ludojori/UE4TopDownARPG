@@ -50,10 +50,15 @@ void ATopDownARPGPlayerController::ActivateAbility1()
 		return;
 	}
 
-	const FString ContextString(TEXT("Ability Context"));
-	UAbility* Ability1 = PlayerCharacter->AbilityDataTable->FindRow<UAbility>(FName(TEXT("Ability1")), ContextString, true);
-	
-	if (IsValid(Ability1))
+	if (PlayerCharacter->AbilityInstances.Num() < 1)
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("In TopDownARPGPlayerController.cpp: Ability1 did not load."));
+		return;
+	}
+
+	UAbility* Ability1 = PlayerCharacter->AbilityInstances[0];
+
+	if (Ability1)
 	{
 		FHitResult Hit;
 		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
@@ -79,8 +84,13 @@ void ATopDownARPGPlayerController::ActivateAbility2()
 		return;
 	}
 
-	const FString ContextString(TEXT("Ability Context"));
-	UAbility* Ability2 = PlayerCharacter->AbilityDataTable->FindRow<UAbility>(FName(TEXT("Ability1")), ContextString, true);
+	if (PlayerCharacter->AbilityInstances.Num() < 2)
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("In TopDownARPGPlayerController.cpp: Ability2 did not load."));
+		return;
+	}
+
+	UAbility* Ability2 = PlayerCharacter->AbilityInstances[1];
 
 	if (IsValid(Ability2))
 	{
@@ -108,8 +118,13 @@ void ATopDownARPGPlayerController::ActivateAbility3()
 		return;
 	}
 
-	const FString ContextString(TEXT("Ability Context"));
-	UAbility* Ability3 = PlayerCharacter->AbilityDataTable->FindRow<UAbility>(FName(TEXT("Ability1")), ContextString, true);
+	if (PlayerCharacter->AbilityInstances.Num() < 3)
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("In TopDownARPGPlayerController.cpp: Ability3 did not load."));
+		return;
+	}
+
+	UAbility* Ability3 = PlayerCharacter->AbilityInstances[2];
 
 	if (IsValid(Ability3))
 	{
@@ -136,8 +151,13 @@ void ATopDownARPGPlayerController::ActivateAbility4()
 		return;
 	}
 
-	const FString ContextString(TEXT("Ability Context"));
-	UAbility* Ability4 = PlayerCharacter->AbilityDataTable->FindRow<UAbility>(FName(TEXT("Ability1")), ContextString, true);
+	if (PlayerCharacter->AbilityInstances.Num() < 4)
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("In TopDownARPGPlayerController.cpp: Ability4 did not load."));
+		return;
+	}
+
+	UAbility* Ability4 = PlayerCharacter->AbilityInstances[3];
 
 	if (IsValid(Ability4))
 	{

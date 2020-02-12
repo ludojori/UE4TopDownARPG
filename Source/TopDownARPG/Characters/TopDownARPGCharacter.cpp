@@ -82,6 +82,24 @@ void ATopDownARPGCharacter::BeginPlay()
 
 	Health = CharacterStruct->MaximumHealth;
 
+	TArray<FAbilityDataStruct*> DataRows;
+
+	const FString ContextString(TEXT("Ability Context"));
+	AbilityDataTable->GetAllRows<FAbilityDataStruct>(ContextString, DataRows);
+
+	for (int32 Index = 0; Index < DataRows.Num(); ++Index)
+	{
+		TSubclassOf<UAbility> Template = DataRows[Index]->Template;
+		if (Template)
+		{
+			AbilityInstances.Add(NewObject<UAbility>(this, Template));
+		}
+		else
+		{
+			UE_LOG(LogTopDownARPG, Warning, TEXT("In TopDownARPGCharacter.cpp: failed to add ability instance \"%s\"."), *DataRows[Index]->Name);
+		}
+	}
+	
 	/** DEPRICATED.
 	for (const TSubclassOf<UAbility>Template : CharacterStruct->AbilityTemplates)
 	{
