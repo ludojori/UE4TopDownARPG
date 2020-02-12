@@ -69,7 +69,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UDecalComponent* CursorToWorld;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	TArray<TSubclassOf<UAbility>> AbilityTemplates;
 
 	UPROPERTY(EditAnywhere)
@@ -78,7 +78,7 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float MaximumHealth;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (AllowPrivateAccess = "true"))
 	float Health;
 
 	UFUNCTION()
