@@ -5,6 +5,7 @@
 #include "Components/SphereComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "Characters/TopDownARPGCharacter.h"
+#include "SubclassOf.h"
 #include "TopDownARPG.h"
 
 ADamageTrap::ADamageTrap()
@@ -32,7 +33,8 @@ void ADamageTrap::OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* Other, 
 	ATopDownARPGCharacter* Character = Cast<ATopDownARPGCharacter>(Other);
 	if (IsValid(Character))
 	{
-		Character->TakeDamage(Damage, FDamageEvent(UDamageType::StaticClass()), nullptr, this);
+		TSubclassOf<UDamageType> InDamageTypeClass;
+		Character->TakeDamage(Damage, FDamageEvent(InDamageTypeClass), nullptr, this);
 	}
 }
 

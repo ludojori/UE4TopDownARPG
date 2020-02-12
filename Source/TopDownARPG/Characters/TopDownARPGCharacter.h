@@ -5,8 +5,28 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Abilities/Ability.h"
+#include "SubclassOf.h"
 #include "DataTables/TopDownARPGCharacterStruct.h"
 #include "TopDownARPGCharacter.generated.h"
+
+USTRUCT()
+struct FAbilityDataStruct : public FTableRowBase
+{
+	GENERATED_BODY()
+
+public:
+	FAbilityDataStruct() :Name("DefaultName"), Template(nullptr), Description("DefaultDescription") {}
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FString Name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	TSubclassOf<UAbility> Template;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	FString Description;
+
+};
 
 UCLASS(Blueprintable)
 class ATopDownARPGCharacter : public ACharacter
@@ -29,10 +49,13 @@ public:
 
 	FORCEINLINE float GetHealth() { return Health; }
 
+	/** A data table containing data for this character's abilities */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = Gameplay)
+	class UDataTable* AbilityDataTable;
 
-
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Gameplay)
 	TArray<UAbility*> AbilityInstances;
+
 private:
 	/** Top down camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))

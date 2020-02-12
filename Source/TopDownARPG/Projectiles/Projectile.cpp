@@ -45,7 +45,8 @@ void AProjectile::OnOverlap(UPrimitiveComponent* OverlappedComp, AActor* Other, 
 	ATopDownARPGCharacter* Character = Cast<ATopDownARPGCharacter>(Other);
 	if (IsValid(Character))
 	{
-		Character->TakeDamage(Damage, FDamageEvent(UDamageType::StaticClass()), nullptr, this);
+		TSubclassOf<UDamageType> InDamageTypeClass;
+		Character->TakeDamage(Damage, FDamageEvent(InDamageTypeClass), nullptr, this);
 	}
 
 	if (Destroy() == false)

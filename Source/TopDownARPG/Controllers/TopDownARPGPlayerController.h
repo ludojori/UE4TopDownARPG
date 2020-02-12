@@ -37,6 +37,8 @@ protected:
 	void OnSetDestinationReleased();
 	void ActivateAbility1();
 	void ActivateAbility2();
+	void ActivateAbility3();
+	void ActivateAbility4();
 };
 
 

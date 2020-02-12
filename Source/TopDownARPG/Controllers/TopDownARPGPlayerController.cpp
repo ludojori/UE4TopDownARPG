@@ -36,6 +36,9 @@ void ATopDownARPGPlayerController::SetupInputComponent()
 
 	InputComponent->BindAction("Ability1", IE_Pressed, this, &ATopDownARPGPlayerController::ActivateAbility1);
 	InputComponent->BindAction("Ability2", IE_Pressed, this, &ATopDownARPGPlayerController::ActivateAbility2);
+	InputComponent->BindAction("Ability3", IE_Pressed, this, &ATopDownARPGPlayerController::ActivateAbility3);
+	InputComponent->BindAction("Ability4", IE_Pressed, this, &ATopDownARPGPlayerController::ActivateAbility4);
+
 }
 
 void ATopDownARPGPlayerController::ActivateAbility1()
@@ -43,21 +46,28 @@ void ATopDownARPGPlayerController::ActivateAbility1()
 	ATopDownARPGCharacter* PlayerCharacter = Cast<ATopDownARPGCharacter>(GetPawn());
 	if (IsValid(PlayerCharacter) == false)
 	{
-		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility1 IsValid(PlayerCharacter) == false"));
+		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility1 IsValid(PlayerCharacter) = false"));
 		return;
 	}
 
-	UAbility* Ability = PlayerCharacter->AbilityInstances[0];
-	if (IsValid(Ability))
+	const FString ContextString(TEXT("Ability Context"));
+	UAbility* Ability1 = PlayerCharacter->AbilityDataTable->FindRow<UAbility>(FName(TEXT("Ability1")), ContextString, true);
+	
+	if (IsValid(Ability1))
 	{
 		FHitResult Hit;
 		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
 
 		if (Hit.bBlockingHit)
 		{
-			Ability->Activate(Hit.ImpactPoint);
+			Ability1->Activate(Hit.ImpactPoint);
 		}
 	}
+	else
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility1 IsValid(Ability1) = false"));
+	}
+	
 }
 
 void ATopDownARPGPlayerController::ActivateAbility2()
@@ -65,20 +75,83 @@ void ATopDownARPGPlayerController::ActivateAbility2()
 	ATopDownARPGCharacter* PlayerCharacter = Cast<ATopDownARPGCharacter>(GetPawn());
 	if (IsValid(PlayerCharacter) == false)
 	{
-		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility1 IsValid(PlayerCharacter) == false"));
+		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility2 IsValid(PlayerCharacter) = false"));
 		return;
 	}
 
-	UAbility* Ability = PlayerCharacter->AbilityInstances[1];
-	if (IsValid(Ability))
+	const FString ContextString(TEXT("Ability Context"));
+	UAbility* Ability2 = PlayerCharacter->AbilityDataTable->FindRow<UAbility>(FName(TEXT("Ability1")), ContextString, true);
+
+	if (IsValid(Ability2))
 	{
 		FHitResult Hit;
 		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
 
 		if (Hit.bBlockingHit)
 		{
-			Ability->Activate(Hit.ImpactPoint);
+			Ability2->Activate(Hit.ImpactPoint);
 		}
+	}
+	else
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility1 IsValid(Ability2) = false"));
+	}
+	
+}
+
+void ATopDownARPGPlayerController::ActivateAbility3()
+{
+	ATopDownARPGCharacter* PlayerCharacter = Cast<ATopDownARPGCharacter>(GetPawn());
+	if (IsValid(PlayerCharacter) == false)
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility3 IsValid(PlayerCharacter) = false"));
+		return;
+	}
+
+	const FString ContextString(TEXT("Ability Context"));
+	UAbility* Ability3 = PlayerCharacter->AbilityDataTable->FindRow<UAbility>(FName(TEXT("Ability1")), ContextString, true);
+
+	if (IsValid(Ability3))
+	{
+		FHitResult Hit;
+		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
+
+		if (Hit.bBlockingHit)
+		{
+			Ability3->Activate(Hit.ImpactPoint);
+		}
+	}
+	else
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility1 IsValid(Ability3) = false"));
+	}
+}
+
+void ATopDownARPGPlayerController::ActivateAbility4()
+{
+	ATopDownARPGCharacter* PlayerCharacter = Cast<ATopDownARPGCharacter>(GetPawn());
+	if (IsValid(PlayerCharacter) == false)
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility4 IsValid(PlayerCharacter) = false"));
+		return;
+	}
+
+	const FString ContextString(TEXT("Ability Context"));
+	UAbility* Ability4 = PlayerCharacter->AbilityDataTable->FindRow<UAbility>(FName(TEXT("Ability1")), ContextString, true);
+
+	if (IsValid(Ability4))
+	{
+		FHitResult Hit;
+		GetHitResultUnderCursor(ECC_Visibility, false, Hit);
+
+		if (Hit.bBlockingHit)
+		{
+			Ability4->Activate(Hit.ImpactPoint);
+		}
+	}
+	else
+	{
+		UE_LOG(LogTopDownARPG, Error, TEXT("ATopDownARPGPlayerController::ActivateAbility1 IsValid(Ability4) = false"));
 	}
 }
 

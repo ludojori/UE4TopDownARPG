@@ -54,6 +54,13 @@ ATopDownARPGCharacter::ATopDownARPGCharacter()
 	CursorToWorld->DecalSize = FVector(16.0f, 32.0f, 32.0f);
 	CursorToWorld->SetRelativeRotation(FRotator(90.0f, 0.0f, 0.0f).Quaternion());
 
+	// Load AbilityDataTable ...
+	static ConstructorHelpers::FObjectFinder<UDataTable> AbilityDataTableObject(TEXT("DataTable'/Game/TopDownCPP/Blueprints/DataTables/AbilityDataTable.AbilityDataTable'"));
+	if (AbilityDataTableObject.Succeeded())
+	{
+		AbilityDataTable = AbilityDataTableObject.Object;
+	}
+
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
@@ -75,10 +82,13 @@ void ATopDownARPGCharacter::BeginPlay()
 
 	Health = CharacterStruct->MaximumHealth;
 
+	/** DEPRICATED.
 	for (const TSubclassOf<UAbility>Template : CharacterStruct->AbilityTemplates)
 	{
 		AbilityInstances.Add(NewObject<UAbility>(this, Template));
 	}
+	*/
+
 }
 
 void ATopDownARPGCharacter::Tick(float DeltaSeconds)
